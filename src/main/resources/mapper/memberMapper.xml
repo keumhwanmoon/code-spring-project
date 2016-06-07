@@ -11,4 +11,12 @@
         insert into tbl_member (userid, userpw, username, email) VALUES
         (#{userid}, #{userpw}, #{username}, #{email})
     </insert>
+
+    <select id="selectMember" resultType="jason.code.spring.domain.MemberVO">
+        select * from tbl_member where userid = #{userid}
+    </select>
+
+    <select id="readWithPw" resultType="jason.code.spring.domain.MemberVO">
+        select * from tbl_member where userid = #{userid} and userpw = #{userpw}
+    </select>
 </mapper>
