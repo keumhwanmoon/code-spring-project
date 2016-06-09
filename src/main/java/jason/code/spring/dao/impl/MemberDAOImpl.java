@@ -30,6 +30,11 @@ public class MemberDAOImpl implements MemberDAO {
     }
 
     @Override
+    public void deleteMember(String memberId) {
+        sqlSession.delete(namespace + ".deleteMember", memberId);
+    }
+
+    @Override
     public MemberVO readMember(String userId) throws Exception {
         return sqlSession.selectOne(namespace + ".selectMember", userId);
     }
