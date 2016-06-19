@@ -1,16 +1,21 @@
 package jason.code.spring;
 
 import com.sun.deploy.security.WIExplorerSigningCertStore;
+import jason.code.spring.dao.BoardDAO;
 import jason.code.spring.dao.MemberDAO;
+import jason.code.spring.domain.BoardVO;
 import jason.code.spring.domain.MemberVO;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.inject.Inject;
+import java.util.List;
 
 /**
  * Created by Jason on 2016-06-07.
@@ -19,8 +24,13 @@ import javax.inject.Inject;
 @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/spring/**/*.xml")
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MemberDAOTest {
+    private Logger logger = LoggerFactory.getLogger(MemberDAOTest.class);
+
     @Inject
     private MemberDAO dao;
+
+    @Inject
+    private BoardDAO boardDAO;
 
     @Test
     public void test1Time() throws Exception {
@@ -41,5 +51,16 @@ public class MemberDAOTest {
     @Test
     public void test3DeleteMember() throws Exception {
         dao.deleteMember("user00");
+    }
+
+    @Test
+    public void test4ListPage() throws Exception {
+        int page = 3;
+
+        List<BoardVO> list = boardDAO.listPage(page);
+
+        for (BoardVO vo : list) {
+            logger.info(vo.getBno() + ":" + vo.getTitle());
+        }
     }
 }
