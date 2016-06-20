@@ -2,6 +2,7 @@ package jason.code.spring.service.impl;
 
 import jason.code.spring.dao.BoardDAO;
 import jason.code.spring.domain.BoardVO;
+import jason.code.spring.domain.Criteria;
 import jason.code.spring.service.BoardService;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +40,10 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public List<BoardVO> listAll() throws Exception {
         return dao.listAll();
+    }
+
+    @Override
+    public List<BoardVO> listCriteria(Criteria cri) throws Exception {
+        return dao.listCriteria(cri);
     }
 }

@@ -2,6 +2,7 @@ package jason.code.spring.dao.impl;
 
 import jason.code.spring.dao.BoardDAO;
 import jason.code.spring.domain.BoardVO;
+import jason.code.spring.domain.Criteria;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -52,5 +53,10 @@ public class BoardDAOImpl implements BoardDAO {
         page = (page -1) * 10;
 
         return session.selectList(namespace + ".listPage", page);
+    }
+
+    @Override
+    public List<BoardVO> listCriteria(Criteria cri) throws Exception {
+        return session.selectList(namespace + ".listCriteria", cri);
     }
 }

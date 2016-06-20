@@ -1,6 +1,5 @@
 package jason.code.spring;
 
-import com.sun.deploy.security.WIExplorerSigningCertStore;
 import jason.code.spring.dao.BoardDAO;
 import jason.code.spring.dao.MemberDAO;
 import jason.code.spring.domain.BoardVO;
@@ -29,9 +28,6 @@ public class MemberDAOTest {
     @Inject
     private MemberDAO dao;
 
-    @Inject
-    private BoardDAO boardDAO;
-
     @Test
     public void test1Time() throws Exception {
         System.out.println(dao.getTime());
@@ -51,16 +47,5 @@ public class MemberDAOTest {
     @Test
     public void test3DeleteMember() throws Exception {
         dao.deleteMember("user00");
-    }
-
-    @Test
-    public void test4ListPage() throws Exception {
-        int page = 3;
-
-        List<BoardVO> list = boardDAO.listPage(page);
-
-        for (BoardVO vo : list) {
-            logger.info(vo.getBno() + ":" + vo.getTitle());
-        }
     }
 }

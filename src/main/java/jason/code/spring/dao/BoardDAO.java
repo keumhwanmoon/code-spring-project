@@ -1,6 +1,7 @@
 package jason.code.spring.dao;
 
 import jason.code.spring.domain.BoardVO;
+import jason.code.spring.domain.Criteria;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface BoardDAO {
     public void delete(Integer bno) throws Exception;
     public List<BoardVO> listAll() throws Exception;
     public List<BoardVO> listPage(int page) throws Exception;
+    public List<BoardVO> listCriteria(Criteria cri) throws Exception;
 }
