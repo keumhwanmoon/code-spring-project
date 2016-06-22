@@ -1,6 +1,8 @@
 package jason.code.spring.controller;
 
 import jason.code.spring.domain.BoardVO;
+import jason.code.spring.domain.Criteria;
+import jason.code.spring.domain.PageMaker;
 import jason.code.spring.service.BoardService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -75,5 +77,23 @@ public class BoardController {
         rttr.addFlashAttribute("msg", "SUCCESS");
 
         return "redirect:/board/listAll";
+    }
+
+    @RequestMapping(value = "/listCri", method = RequestMethod.GET)
+    public void listAll(Criteria cri, Model model) throws Exception {
+        logger.info("show list Page with Criteria...............");
+        model.addAttribute("list", service.listCriteria(cri));
+    }
+
+    @RequestMapping(value = "/listPage", method = RequestMethod.GET)
+    public void listPage(Criteria criteria, Model model) throws Exception {
+        logger.info(criteria.toString());
+
+        model.addAttribute("list", service.listCriteria(criteria));
+        PageMaker pageMaker = new PageMaker();
+        pageMaker.setCriteria(criteria);
+        pageMaker.setTotalCount(131);
+
+        model.addAttribute("pageMaker", pageMaker);
     }
 }
